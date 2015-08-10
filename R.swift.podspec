@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "7.0"
 
-  s.source       = { :http => "https://github.com/mrhard4/R.swift/archive/0.8.6.zip" }
+  s.source       = { :http => "https://github.com/mrhard4/R.swift/archive/0.9.1.zip" }
 
   s.preserve_paths = "rswift"
 
