@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "R.swift"
-  s.version      = "0.9.1"
+  s.version      = "0.9.2"
   s.summary      = "Use strong typed, autocompleted resources like images and segues in Swift"
 
   s.description  = <<-DESC
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "7.0"
 
-  s.source       = { :http => "https://github.com/mrhard4/R.swift/archive/0.9.1.zip" }
+  s.source       = { :http => "https://github.com/mrhard4/R.swift/releases/download/0.9.2/rswift" }
 
   s.preserve_paths = "rswift"
 
