@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "R.swift"
-  s.version      = "0.8.4"
+  s.version      = "0.9.1"
   s.summary      = "Use strong typed, autocompleted resources like images and segues in Swift"
 
   s.description  = <<-DESC
