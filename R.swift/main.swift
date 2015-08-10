@@ -10,16 +10,17 @@
 import Foundation
 
 let defaultFileManager = NSFileManager.defaultManager()
-let findAllAssetsFolderURLsInDirectory = filterDirectoryContentsRecursively(defaultFileManager) { $0.isDirectory && $0.absoluteString!.pathExtension == "xcassets" }
-let findAllNibURLsInDirectory = filterDirectoryContentsRecursively(defaultFileManager) { !$0.isDirectory && $0.absoluteString!.pathExtension == "xib" }
-let findAllStoryboardURLsInDirectory = filterDirectoryContentsRecursively(defaultFileManager) { !$0.isDirectory && $0.absoluteString!.pathExtension == "storyboard" }
+let findAllAssetsFolderURLsInDirectory = filterDirectoryContentsRecursively(defaultFileManager) { $0.isDirectory && ($0.absoluteString as NSString).pathExtension == "xcassets" }
+let findAllNibURLsInDirectory = filterDirectoryContentsRecursively(defaultFileManager) { !$0.isDirectory && ($0.absoluteString as NSString).pathExtension == "xib" }
+let findAllStoryboardURLsInDirectory = filterDirectoryContentsRecursively(defaultFileManager) { !$0.isDirectory && ($0.absoluteString as NSString).pathExtension == "storyboard" }
 
 inputDirectories(NSProcessInfo.processInfo())
   .each { directory in
 
     var error: NSError?
-    if !directory.checkResourceIsReachableAndReturnError(&error) {
-      failOnError(error)
+    directory.checkResourceIsReachableAndReturnError(&error)
+    if let error = error {
+      fail(error)
       return
     }
 
@@ -64,7 +65,7 @@ inputDirectories(NSProcessInfo.processInfo())
       ]
     )
 
-    let fileContents = join("\n", [
+    let fileContents = "\n".join([
       Header, "",
       Imports, "",
       resourceStruct.description, "",
@@ -73,7 +74,8 @@ inputDirectories(NSProcessInfo.processInfo())
       NibResourceProtocol.description, "",
       ReusableProtocol.description, "",
       ReuseIdentifierUITableViewExtension.description, "",
-      ReuseIdentifierUICollectionViewExtension.description,
+      ReuseIdentifierUICollectionViewExtension.description, "",
+      NibUIViewControllerExtension.description
     ])
 
     // Write file if we have changes
